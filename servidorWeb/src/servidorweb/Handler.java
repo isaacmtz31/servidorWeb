@@ -57,11 +57,11 @@ public class Handler implements Runnable
             {
                 getArch(line);
                 if(FileName.compareTo("")==0)
-                {                            
+                {
                     SendA("index.htm");
                 }
                 else
-                {                        
+                {
                     SendA(FileName);
                 }
                 System.out.println("**"+FileName);
@@ -158,7 +158,33 @@ public class Handler implements Runnable
                        sb = sb +"HTTP/1.0 200 ok\n";
                        sb = sb +"Server: Axel Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
-                       sb = sb +"Content-Type: text/html \n";
+                       
+                       if(arg.contains(".jpg") || arg.contains(".jpeg") || arg.contains(".jpe")){
+                           sb = sb +"Content-Type: image/jpeg \n";
+                       } else if(arg.contains(".pdf")){
+                           sb = sb +"Content-Type: application/pdf \n";
+                       } else if(arg.contains(".xla") || arg.contains(".xlc") || arg.contains(".xlm") || arg.contains(".xls") || arg.contains(".xlt") || arg.contains(".xlw")){
+                           sb = sb +"Content-Type: application/vnd.ms-excel \n";
+                       } else if(arg.contains(".msg")){
+                           sb = sb +"Content-Type: application/vnd.ms-outlook \n";
+                       } else if(arg.contains(".pot") || arg.contains(".pps") || arg.contains(".ppt")){
+                           sb = sb +"Content-Type: application/vnd.ms-powerpoint \n";
+                       } else if(arg.contains(".latex")){
+                           sb = sb +"Content-Type: application/x-latex \n";
+                       } else if(arg.contains(".zip")){
+                           sb = sb +"Content-Type: application/zip \n";
+                       } else if(arg.contains(".mp3")){
+                           sb = sb +"Content-Type: audio/mpeg \n";
+                       } else if(arg.contains(".wav")){
+                           sb = sb +"Content-Type: audio/x-wav \n";
+                       } else if(arg.contains(".gif")){
+                           sb = sb +"Content-Type: image/gif \n";
+                       } else if(arg.contains(".mp2") || arg.contains(".mpa") || arg.contains(".mpe") || arg.contains(".mpeg") || arg.contains(".mpg") || arg.contains(".mpv2")){
+                           sb = sb +"Content-Type: video/mpeg \n";
+                       } else {
+                           sb = sb +"Content-Type: text/html \n";
+                       }
+                       
                        sb = sb +"Content-Length: "+tam_archivo+" \n";
                        sb = sb +"\n";
                        bos.write(sb.getBytes());
@@ -170,8 +196,8 @@ public class Handler implements Runnable
                bos.write(buf,0,b_leidos);
             }
             bos.flush();
-            bis2.close();                      
-        }                       
+            bis2.close();
+        }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
