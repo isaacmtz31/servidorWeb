@@ -3,6 +3,7 @@ package servidorweb;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +23,7 @@ public class Handler implements Runnable
     protected Socket socket;
     protected PrintWriter pw;
     protected String FileName;
-    protected BufferedReader br;
+    protected DataInputStream br;
     protected BufferedOutputStream bos;
     
     public Handler(Socket _socket) throws Exception
@@ -34,10 +35,15 @@ public class Handler implements Runnable
     {
         try
         {
-            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            int n;
+            byte[] b = new byte[2000];            
+            //br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            br = new DataInputStream(socket.getInputStream());            
             bos = new BufferedOutputStream(socket.getOutputStream());
             pw = new PrintWriter(new OutputStreamWriter(bos));
-            String line = br.readLine();
+            //String line = br.readLine();
+            n = br.read(b);
+            String line = new String(b, 0, n);  
             
             if(line == null)
             {
@@ -50,10 +56,9 @@ public class Handler implements Runnable
             
             System.out.println("\nCliente Conectado desde: "+socket.getInetAddress());
             System.out.println("Por el puerto: "+socket.getPort());
-            System.out.println("Recurso (datos): "+line+"\r\n\r\n");
-            System.out.println("--> " + line);
+            //System.out.println("Recurso (datos): "+line+"\r\n\r\n");
+            //System.out.println("--> " + line);
             
-
             if(line.indexOf("?") == -1 && !line.toUpperCase().startsWith("POST") && !line.toUpperCase().startsWith("DELETE")) //Para mandar al inicio
             {
                 getArch(line);
@@ -144,13 +149,46 @@ public class Handler implements Runnable
             {
                 if(line.toUpperCase().startsWith("POST"))
                 {
-                    pw.println("HTTP/1.0 200 Okay");
+                    String aux = "";                  
+                    int prueba = line.indexOf("Content-Length:", 0);                   
+                    String cont_len = line.charAt(prueba+16) + "" + line.charAt(prueba+17);
+                    int i = n - Integer.parseInt(cont_len);
+                    System.out.println("**********\n" + i + " " + n);
                     
-                    pw.flush();
+                    for(  ; i < n; i++)
+                    {                        
+                        if(line.charAt(i) != '&')
+                        {
+                          aux = aux + line.charAt(i);
+                        }
+                        else
+                        {
+                            aux = aux + "<br>";
+                        }
+                    }
+                    
+                    String sb = "";
+                       sb = sb +"HTTP/1.0 200 ok\n";
+                       sb = sb +"Server: CRI CRI Server/1.0 \n";
+                       sb = sb +"Date: " + new Date()+" \n";
+                       sb = sb +"Content-Type: application/x-www-form-urlencoded \n";
+                       sb = sb +"\n";                                          
+                        pw.println(sb);                    
+                        pw.flush();                       
+                        pw.println();
+                        pw.flush();
+                        pw.print("<html><head><title>SERVIDOR WEB");
+                        pw.flush();
+                        pw.print("</title></head><body bgcolor=\"#22eaaa\"><center><h1><br>METODO POST<br><hr>Parametros Obtenidos...</br></h1>");
+                        pw.flush();
+                        pw.print("<h3><b>"+aux+"</b></h3>");
+                        pw.flush();
+                        pw.print("</center></body></html>");
+                        pw.flush();
                 }
                 else
                 {
-                        String sb = "";
+                       String sb = "";
                        sb = sb +"HTTP/1.0 200 ok\n";
                        sb = sb +"Server: Axel Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
