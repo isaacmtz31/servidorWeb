@@ -1,4 +1,5 @@
 package servidorweb;
+import java.io.File;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +24,9 @@ public class ServidorWeb implements Runnable
     
     public static void main(String[] args)
     {
+        File prueba = new File("borrar\\archivo.txt"); // archivo sin permisos de escritura
+        prueba.setReadOnly();
+        
         try {
             ServidorWeb sw = new ServidorWeb();            
             Thread t = new Thread(sw);

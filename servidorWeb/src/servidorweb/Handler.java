@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,8 +53,8 @@ public class Handler implements Runnable
             System.out.println("Recurso (datos): "+line+"\r\n\r\n");
             System.out.println("--> " + line);
             
-            
-            if(line.indexOf("?") == -1 && !line.toUpperCase().startsWith("POST")) //Para mandar al inicio
+
+            if(line.indexOf("?") == -1 && !line.toUpperCase().startsWith("POST") && !line.toUpperCase().startsWith("DELETE")) //Para mandar al inicio
             {
                 getArch(line);
                 if(FileName.compareTo("")==0)
@@ -87,6 +88,58 @@ public class Handler implements Runnable
                     pw.print("</center></body></html>");
                     pw.flush();
             }
+            
+            else if(line.toUpperCase().startsWith("DELETE")){
+                getArch(line);
+                File f = new File(FileName);
+                String message = "";
+                String bgColor = "\"#cc0000\"";
+                String fontColor = "\"color: #ffffff;\"";
+                
+                if( f.exists() ){ //checamos si existe el archivo
+                    
+                    if( f.canWrite() ){//checamos los permisos de escritura
+                        
+                        f.delete(); //se borra el archivo
+                        
+                               
+                        bgColor = "\"#2eb82e\"";
+                        fontColor = "\"color: #ffffff;\"";
+                        message = "Recurso eliminado";
+
+                        pw.println("HTTP/1.0 200 Ok");
+                        pw.flush();
+                     
+                    }
+                    else{
+                        bgColor = "\"#cc0000\"";
+                        fontColor = "\"color: #ffffff;\"";
+                        message = "Operación no autorizada";
+                    
+                        pw.println("HTTP/1.0 403 Forbidden");
+                        pw.flush();
+                    }
+                }
+                else{
+                    
+                    bgColor = "\"#ffffff\"";
+                    fontColor = "\"color: #000000;\"";
+                    message = "Archivo no encontrado :(";
+                    
+                    pw.println("HTTP/1.0 404 Not Found");
+                    pw.flush();
+                }
+                
+                pw.println();
+                pw.flush();
+                pw.print("<html><head><title>SERVIDOR WEB");
+                pw.flush();
+                pw.print("</title></head><body bgcolor="+bgColor+"><center><h1 style="+fontColor+"><br>"+message+"</br></h1>");
+                pw.flush();
+                pw.print("</center></body></html>");
+                pw.flush();
+            }
+            
             else
             {
                 if(line.toUpperCase().startsWith("POST"))
@@ -105,7 +158,7 @@ public class Handler implements Runnable
                        sb = sb +"\n";
                        bos.write(sb.getBytes());
                        bos.flush();
-                }                                 
+                }                               
             }
             pw.flush();
             bos.flush();
@@ -127,7 +180,7 @@ public class Handler implements Runnable
     {
         int i;
         int f;
-        if(line.toUpperCase().startsWith("GET"))
+        if(line.toUpperCase().startsWith("GET") || line.toUpperCase().startsWith("DELETE"))
         {
             i=line.indexOf("/");
             f=line.indexOf(" ",i);
