@@ -59,7 +59,7 @@ public class Handler implements Runnable
             //System.out.println("Recurso (datos): "+line+"\r\n\r\n");
             //System.out.println("--> " + line);
             
-            if(line.indexOf("?") == -1 && !line.toUpperCase().startsWith("POST") && !line.toUpperCase().startsWith("DELETE")) //Para mandar al inicio
+            if(line.indexOf("?") == -1 && !line.toUpperCase().startsWith("POST") && !line.toUpperCase().startsWith("DELETE") && !line.toUpperCase().startsWith("HEAD")) //Para mandar al inicio
             {
                 getArch(line);
                 if(FileName.compareTo("")==0)
@@ -92,6 +92,24 @@ public class Handler implements Runnable
                     pw.flush();
                     pw.print("</center></body></html>");
                     pw.flush();
+                    
+            } else if(line.toUpperCase().startsWith("HEAD")){
+                StringTokenizer tokens=new StringTokenizer(line,"?");
+                String req_a = tokens.nextToken();
+                String req = tokens.nextToken();
+                
+                System.out.println("HERE");
+                System.out.println("Token1: "+req_a+"\r\n\r\n");
+                System.out.println("Token2: "+req+"\r\n\r\n");
+                
+                pw.println("HTTP/1.0 200 Okay");
+                pw.flush();
+                pw.println("Server: CRI CRI Server/1.0 \n");
+                pw.flush();
+                pw.println("Date: " + new Date()+" \n");
+                pw.flush();
+                pw.println();
+                pw.flush();
             }
             
             else if(line.toUpperCase().startsWith("DELETE")){
@@ -190,7 +208,7 @@ public class Handler implements Runnable
                 {
                        String sb = "";
                        sb = sb +"HTTP/1.0 200 ok\n";
-                       sb = sb +"Server: Axel Server/1.0 \n";
+                       sb = sb +"Server: CRI CRI Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
                        sb = sb +"Content-Type: application/x-www-form-urlencoded \n";
                        sb = sb +"\n";
@@ -247,7 +265,7 @@ public class Handler implements Runnable
             /***********************************************/
                        String sb = "";
                        sb = sb +"HTTP/1.0 200 ok\n";
-                       sb = sb +"Server: Axel Server/1.0 \n";
+                       sb = sb +"Server: CRI CRI Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
                        
                        if(arg.contains(".jpg") || arg.contains(".jpeg") || arg.contains(".jpe")){
