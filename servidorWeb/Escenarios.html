@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PvZ: GW Escenarios</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="shortcut icon" href="http://im1.trueachievements.com/imagestore/0001471000/1471070.jpg" type="image/png" />
+
+	<script type="text/javascript">
+		var demora;
+        var num = 1;
+        function empieza()
+        {
+            demora = setInterval("cambia()",2000);
+        }
+        function cambia()
+        {
+            img.src="images/escenario"+num+".png";
+            ++num;
+            if(num>6)
+                num=1;
+        }
+	</script>
+</head>
+
+<body onload="empieza();">
+	<div class="div0" id="inicio"><img class="logo"src="images/logo.png"></div>
+	<div class="div1">
+		<div class="div3">
+			<ul class="menulista">
+  				<li><a class="active" href="index.htm">Inicio</a></li>
+  				<li><a  href="Historia.html">Historia</a></li>
+  				<li><a  href="Personajes.html">Personajes</a></li>
+  				<li><a  href="Escenarios.html">Escenarios</a></li>
+  				<li><a  href="get.html">GET</a></li>
+  				<li><a  href="post.html">POST</a></li>
+  				
+			</ul>
+
+		</div>
+		
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="div4">
+			<p class="titulos">Escenarios</p>
+			
+			<p align=center><img id="img" src ="images/escenario1.png" alt="Escenario"></p>
+			
+			<br><br>
+			
+			
+		</div>
+	</div>
+	
+	
+
+	<br>
+
+	<div class="div2">
+
+		<p  class="p1"><a href="#inicio" class="link">Subir</a></p>
+
+	</div>
+
+</body>
+</html>

@@ -234,7 +234,11 @@ public class Handler implements Runnable
                            sb = sb +"Content-Type: image/gif \n";
                        } else if(arg.contains(".mp2") || arg.contains(".mpa") || arg.contains(".mpe") || arg.contains(".mpeg") || arg.contains(".mpg") || arg.contains(".mpv2")){
                            sb = sb +"Content-Type: video/mpeg \n";
-                       } else {
+                       } 
+                          else if(arg.contains(".css")){
+                           sb = sb +"Content-Type: text/css \n";
+                       }
+                         else {
                            sb = sb +"Content-Type: text/html \n";
                        }
                        

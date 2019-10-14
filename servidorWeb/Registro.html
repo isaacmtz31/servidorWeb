@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PvZ: GW Registro</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="shortcut icon" href="http://im1.trueachievements.com/imagestore/0001471000/1471070.jpg" type="image/png" />
+	<script type="text/javascript" src="javascript/convers.js"></script>
+    <script type="text/javascript">
+		
+        function mostrar(menuTipo, menuPer){
+                var sel = menuTipo.selectedIndex;
+                var cuantos = menuPer.length;        
+                if(sel === 1){
+                     mat2=new Array ("Soldado", "Ingeniero", "Científico", "All-Star");
+                     for(contador = 0; contador < mat2.length;++contador){
+                         menuPer.options[contador+1]=new Option (mat2[contador]);        
+                     }
+                }
+                 else
+                    if(sel === 2){
+                        mat3=new Array ("Lanzaguisantes", "Girasol", "Carnívora", "Cactús");
+                        for(contador = 0; contador < mat3.length;++contador){
+                         menuPer.options[contador+1]=new Option (mat3[contador]);    
+                     }
+                 }
+                     if(sel === 0){
+                        for (contador=1; contador<cuantos; contador++)
+                    menuPer.options[1]=null;
+              
+                    }
+                }
+        function eje(nom, us,cel,corre1,corre2,corre3 ,menTipo, menPerso, nivel, valora, cuadro1, cuadro2)
+        {
+            
+
+            var co=0;
+            var de="";
+            var total=0;
+            for (i= 0; i < nivel.length;i++)
+                if (nivel[i].checked)
+                    if (nivel[i].value ==='1')
+                    {
+                        co = "Noob";
+                        break;
+                    }
+                    else 
+                    if (nivel[i].value === '2')
+                    {
+                        co = "Intermedio";
+                        break;
+                    }
+                    else
+                    if (nivel[i].value ==='3')
+                    {
+                        co = "Avanzado";
+                        break;
+                    }
+
+            
+                                          
+            
+
+            var opctipo = menTipo.options[menTipo.selectedIndex];
+            var opcAr = menPerso.options[menPerso.selectedIndex];
+
+             alert ( "Tus datos son: "+"\nNombre:" + nom.value + "\n Username: " + us.value +"\n Teléfono: "+cel.value+"\n Correo: "+corre1.value+"@"+corre2.value+"."+corre3.value+ "\n Bando: " + opctipo.text + "\n Personaje: " + opcAr.text +"\n Nivel: " + co+"\n Valoración: "+valora.value +"\n Número: "+cuadro1.value+"\n Número(letra): "+cuadro2.value);
+            alert("Bienvenido a la comunidad :D");
+                         
+        }
+
+        function valida(texto, use,celu, corre1,corre2,corre3, valo, botonn,men1, men2, radio, cuadro1, cuadro2)
+        {
+            var valor= texto.value;
+            var largo=valor.length;
+
+            var useV=use.value;
+            var useL=useV.length;
+
+            var celuV= celu.value;
+            var celuL= celuV.length;
+
+            var corre1V= corre1.value;
+            var corre1L= corre1V.length;
+
+            var corre2V= corre2.value;
+            var corre2L= corre2V.length;
+
+            var corre3V= corre3.value;
+            var corre3L= corre3V.length;
+
+            var valoV= valo.value;
+            var valoL= valoV.length;
+
+            var opctipo = men1.selectedIndex;
+            var opcAr = men2.selectedIndex;
+
+            var cuadro1V= cuadro1.value;
+            var cuadro1L= cuadro1V.length;
+
+            var cuadro2V= cuadro2.value;
+            var cuadro2L= cuadro2V.length;
+
+
+            //esce = new Array;
+
+
+            if(largo==0 )
+            {
+                alert("Hay un campo vacío");
+                texto.focus();
+                document.formulario.boton.disabled=true; 
+            }
+            else
+                if(useL==0)
+                {
+                    alert("Hay un campo vacío")
+                    use.focus();
+                    document.formulario.boton.disabled=true;
+                }
+                else
+                    if(celuL==0)
+                    {
+                        alert("Hay un campo vacío")
+                        celu.focus();
+                        document.formulario.boton.disabled=true;
+                    }
+                    else
+                        if(corre1L==0)
+                        {
+                            alert("Hay un campo vacío")
+                            corre1.focus();
+                            document.formulario.boton.disabled=true;
+                        }
+                        else
+                            if(corre2L==0)
+                        {
+                            alert("Hay un campo vacío")
+                            corre2.focus();
+                            document.formulario.boton.disabled=true;
+                        }
+                        else
+                            if(corre3L==0)
+                        {
+                            alert("Hay un campo vacío")
+                            corre3.focus();
+                            document.formulario.boton.disabled=true;
+                        }
+                        else
+                            if (opctipo==0) {
+                                alert("Seleccione un tipo de personaje")
+                                men1.focus();
+                                document.formulario.boton.disabled=true;
+                            }
+                            else
+                                if(opcAr==0)
+                                {
+                                    alert("Seleccione un  personaje")
+                                men2.focus();
+                                document.formulario.boton.disabled=true;       
+                                }
+                                else
+                                    if(valoL==0)
+                                    {
+                                        alert("Hay un campo vacío")
+                                        valo.focus();
+                                        document.formulario.boton.disabled=true;
+                                
+                                    }
+                                    else
+                                        if(valoL>4 || valoV>10)
+                                        {
+                                            alert("Calificación inválida")
+                                            valo.focus();
+                                            document.formulario.boton.disabled=true;
+                                        }
+                                        else
+                                            if(cuadro1L==0)
+                                            {
+                                                alert("Hay un campo vacío")
+                                                cuadro1.focus();
+                                                document.formulario.boton.disabled=true;
+                                            }
+                                            else
+                                                if (cuadro2L==0) 
+                                                {
+                                                    alert("Hay un campo vacío")
+                                                    cuadro2.focus();
+                                                    document.formulario.boton.disabled=true;
+                                                }
+                                                else
+                                                    if(largo!=0 && useL!=0&& celuL!=0 && corre1L!=0&&corre2L!=0&&corre3L!=0&& valoL!=0 && cuadro1!=0 && cuadro2!=0)
+                                                    {
+                                                        alert("Felicidades, tus datos son correctos puedes continuar");
+                                                        document.formulario.boton.disabled=false;
+                                                        document.formulario.boton2.disabled=true;
+                                                        botonn.focus();
+                                                    }
+        }
+
+        function soloLetras(event)
+        {
+            var tecla= event.wich || event.keyCode;
+            if((tecla>= 97 && tecla<=122) || (tecla>=65 && tecla <=90)|| (tecla==8 || tecla==224|| tecla==232 || tecla== 236 || tecla==242 || tecla==249 || tecla==241))
+                return true;
+                else 
+                    return false; 
+        }
+
+        function soloLetras2(event)
+        {
+            var tecla= event.wich || event.keyCode;
+            if((tecla>= 97 && tecla<=122) || (tecla>=65 && tecla <=90)|| (tecla==8 || tecla==32||tecla==224|| tecla==232 || tecla== 236 || tecla==242 || tecla==249 || tecla==241))
+                return true;
+                else 
+                    return false; 
+        }
+
+        function sinEspacios(event)
+        {
+             var tecla= event.wich || event.keyCode;
+             if(tecla!=32)
+                return true;
+            else 
+                return false;
+        }
+
+        function soloNum(e) {
+            var tecla= e.which || e.keyCode;
+            if((tecla>=48 && tecla<=57) || tecla    ==8)
+                return true;
+            else
+                return false;
+        }
+
+        function nDecimales(event, cuadro)
+        {
+            var tecla= event.which || event.keyCode;
+            if((tecla>=48 && tecla<=57) || tecla    ==8)
+                return true;
+            else
+                if (tecla==46) {
+                    posicion= cuadro.value.indexOf('.');
+                    if (posicion==-1) 
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return false;
+        }
+
+       
+	</script>
+</head>
+
+<body>
+	<div class="div0" id="inicio"><img class="logo"src="images/logo.png"></div>
+	<div class="div1">
+		<div class="div3">
+			<ul class="menulista">
+  				<li><a class="active" href="Prac.html">Inicio</a></li>
+  				<li><a  href="Historia.html">Historia</a></li>
+  				<li><a  href="Personajes.html">Personajes</a></li>
+  				<li><a  href="Escenarios.html">Escenarios</a></li>
+  				<li><a  href="Registro.html">Regístrate</a></li>
+
+			</ul>
+
+		</div>
+		
+		
+		<div class="div4-2">
+			<br>
+			<p class="titulos">Regístrate</p>
+			
+			<form name="formulario">
+                <div >
+                        <br>
+                        Nombre(solo letras): 
+                        <input type="text" id="nombre" onkeypress="return soloLetras2(event)" autofocus/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Username: 
+                        <input type="text" id="user" onkeypress="return sinEspacios(event)"/>
+                        <br><br>
+                        Celular(números):
+                        <input type="text" id="cel" onkeypress="return soloNum(event)" class="cuadrito1" />
+                        <br><br>
+                        Correo(Llene todos los campos):
+                        <input type="text" id="correo1" onkeypress="return sinEspacios(event)"/>
+                        @&nbsp;<input type="text" id="correo2" class="cuadrito1" onkeypress="return soloLetras(event)"/>
+                        .&nbsp;<input type="text" id="correo3" class="cuadrito2" onkeypress="return soloLetras(event)"/>
+                        <br><br><br>
+                        Bando: <select name="menTipo" OnChange="mostrar(menTipo, menPerso)">
+                        <option value="opca">Selecciona bando </option>
+                        <option value="opcb">Zombies</option>
+                        <option value="opcc">Plantas </option>
+                        </select>
+                         &nbsp;&nbsp;&nbsp;&nbsp;Seleccione un personaje: 
+                        <select name="menPerso">
+                        <option value="x">Elija un personaje</option>
+                        </select>
+                         <br><br><br>
+                         
+                        Nivel: 
+                        <br>
+                        Noob
+                        <input type ="radio" name="level" value="1" checked> 
+                        &nbsp; &nbsp; &nbsp; &nbsp; Intermedio
+                        <input type ="radio" name="level" value="2"> 
+                        &nbsp; &nbsp; &nbsp; &nbsp; Avanzado
+                        <input type ="radio" name="level" value="3"> 
+                        <br><br>
+                        Valoración del juego(De 0 a 10,puede utilizar hasta dos decimales):
+                        <input type="text" id="valoracion" onkeypress="return nDecimales(event,valoracion )" />
+                        <br><br><br>
+                        Coversor de números a letras
+                        <br><br>
+                        Número <input type="text" name="num1" onkeypress="return soloNum(event)" onkeyup="transforma(num1, num2)" ></input>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         Letras <input type="text" name="num2" value="Ingresa un número entre 1 y 999999" readonly style="width:500px"></input>
+                        
+                        
+            </div>
+            <div >
+                <br> <br>
+                <p align=center><input type="button" name="boton2" value="Revisar datos" onClick="valida(nombre, user,cel,correo1,correo2,correo3,valoracion, boton,menTipo, menPerso, level,num1,num2)"></p>
+                <br>
+                
+                <p align=center> <a href="Prac.html"><input type ="button" name="boton" value="Enviar datos" onClick="eje(nombre, user,cel,correo1,correo2,correo3 ,menTipo, menPerso, level, valoracion, num1, num2)" disabled></a> </p>
+            </div>
+            </form>
+            
+
+		</div>
+	</div>
+	
+	
+
+	<br>
+
+	<div class="div2">
+
+		<p  class="p1"><a href="#inicio" class="link">Subir</a></p>
+		<p class="p1"><a href="https://twitter.com/chrisosornio" class="link">Contáctame </a></p>
+
+	</div>
+
+</body>
+</html>
