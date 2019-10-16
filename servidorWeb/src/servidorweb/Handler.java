@@ -190,7 +190,7 @@ public class Handler implements Runnable
                 {
                        String sb = "";
                        sb = sb +"HTTP/1.0 200 ok\n";
-                       sb = sb +"Server: Axel Server/1.0 \n";
+                       sb = sb +"Server: CRI CRI Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
                        sb = sb +"Content-Type: application/x-www-form-urlencoded \n";
                        sb = sb +"\n";
@@ -247,7 +247,7 @@ public class Handler implements Runnable
             /***********************************************/
                        String sb = "";
                        sb = sb +"HTTP/1.0 200 ok\n";
-                       sb = sb +"Server: Axel Server/1.0 \n";
+                       sb = sb +"Server: CRI CRI Server/1.0 \n";
                        sb = sb +"Date: " + new Date()+" \n";
                        
                        if(arg.contains(".jpg") || arg.contains(".jpeg") || arg.contains(".jpe")){
